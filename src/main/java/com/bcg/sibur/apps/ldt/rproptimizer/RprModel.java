@@ -5,18 +5,18 @@ public class RprModel {
     private String scriptRes;
     private Integer errorLevel;
     private Integer batRetVal;
-    private Integer cnt = 0;
+    private Integer callCnt;
 
     public RprModel() {
         super();
     }
 
-    public RprModel(String scriptParm, String scriptRes, Integer errorLevel, Integer batRetVal) {
+    public RprModel(String scriptParm, String scriptRes, Integer errorLevel, Integer batRetVal, Integer callCnt) {
         this.scriptParm = scriptParm;
         this.scriptRes = scriptRes;
         this.errorLevel = errorLevel;
         this.batRetVal = batRetVal;
-        this.cnt = ++cnt;
+        this.callCnt = callCnt;
     }
 
     public String getScriptRes() {
@@ -59,12 +59,11 @@ public class RprModel {
         this.scriptParm = scriptParm;
     }
 
-    public Integer getCnt() {
-        return cnt;
+    public Integer getCallCnt() {
+        return callCnt;
     }
 
-    public void setCnt(Integer cnt) {
-        this.cnt = cnt;
+    public void setCallCnt(Integer callCnt) {
+        this.callCnt = callCnt;
     }
-
 }

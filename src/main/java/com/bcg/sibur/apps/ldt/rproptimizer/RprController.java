@@ -38,6 +38,8 @@ public class RprController {
     @Value("${pytfile}")
     private String pytFile;
 
+    private Integer callCnt = 0;
+
 /*
     @RequestMapping(value = "/run-rpr", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String get() {
@@ -65,7 +67,10 @@ public class RprController {
         s = stdInput.readLine();
         errLvl = Integer.valueOf(stdInput.readLine());
         batRetVal =  p.waitFor();
-        res = new RprModel (batParam, s, errLvl, batRetVal);
+
+        ++callCnt;
+
+        res = new RprModel (batParam, s, errLvl, batRetVal, callCnt);
 
         return res;
 
