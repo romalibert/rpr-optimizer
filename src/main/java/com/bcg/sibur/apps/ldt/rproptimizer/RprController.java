@@ -49,8 +49,8 @@ public class RprController {
         List<String> args = new ArrayList<String>();
         RprModel res ;
         args.add (batDir.concat(batPath).concat(batFile)); // command name
-        args.add (batParam); // optional args added as separate list items
-        args.add (pytDir.concat(pytPath).concat(pytFile)); // optional args added as separate list items
+        args.add (batParam); // parameter passed in batfile
+        args.add (pytDir.concat(pytPath).concat(pytFile)); // path to the python script
         ProcessBuilder pb = new ProcessBuilder (args);
         Process p = null;
 
