@@ -25,8 +25,20 @@ public class RunDev implements MessageService {
     @Value("${batfile}")
     private String batFile;
 
-    @Value("${batparam}")
-    private String batParam;
+    @Value("${batparmtst}")
+    private String batParmTst;
+
+    @Value("${batparmhost}")
+    private String batParmHost;
+
+    @Value("${batparmdbname}")
+    private String batParmDbname;
+
+    @Value("${batparmuser}")
+    private String batParmUser;
+
+    @Value("${batparmpass}")
+    private String batParmPass;
 
     @Value("${pytdir}")
     private String pytDir;
@@ -47,11 +59,17 @@ public class RunDev implements MessageService {
     */
     @Override
     public RprModel getResponse() throws InterruptedException, IOException {
+        String connStr = "\"".concat(batParmHost).concat(" ").concat(batParmDbname).concat(" ").concat(batParmUser).concat(" ").concat(batParmPass).concat("\"");
+
         List<String> args = new ArrayList<String>();
         RprModel res ;
         args.add (batDir.concat(batPath).concat(batFile)); // command name
-        args.add (batParam); // parameter passed in batfile
+        //System.out.println(batDir.concat(batPath).concat(batFile));
+        //args.add (batParmTst); // parameter passed in batfile
+        args.add (connStr); // connect string
+        //System.out.println(connStr);
         args.add (pytDir.concat(pytPath).concat(pytFile)); // path to the python script
+        //System.out.println(pytDir.concat(pytPath).concat(pytFile));
         ProcessBuilder pb = new ProcessBuilder (args);
         Process p = null;
 
@@ -59,17 +77,18 @@ public class RunDev implements MessageService {
         BufferedReader stdInput = new BufferedReader(
                 new InputStreamReader( p.getInputStream() ));
 
-        String s ;
+        String s = "See tmp.log for ".concat(pytDir.concat(pytPath).concat(pytFile).concat(" output."));
         Integer errLvl;
         Integer batRetVal;
 
-        s = stdInput.readLine();
+        //s = stdInput.readLine();
         errLvl = Integer.valueOf(stdInput.readLine());
+
         batRetVal =  p.waitFor();
 
         ++callCnt;
 
-        res = new RprModel (batParam, s, errLvl, batRetVal, callCnt);
+        res = new RprModel (connStr, s, errLvl, batRetVal, callCnt);
 
         return res;
 
