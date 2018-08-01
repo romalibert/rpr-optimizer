@@ -44,47 +44,19 @@ public class RunDevSib implements MessageService {
 
     @Autowired
     private RprModelService rprModelService;
-//    private Integer callCnt = 0;
-    /*
-        @RequestMapping(value = "/run-rpr", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-        public String get() {
-            return "run rpr";
-        }
-    */
+
     @Override
     public RprModel getResponse() throws InterruptedException, IOException {
-//        String connStr = "\"".concat(batParmHost).concat(" ").concat(batParmDbname).concat(" ").concat(batParmUser).concat(" ").concat(batParmPass).concat("\"");
-//
-//        List<String> args = new ArrayList<String>();
-//        RprModel res ;
-//        args.add (batPath.concat(batFile)); // command name
-//        //System.out.println(batDir.concat(batPath).concat(batFile));
-//        args.add (connStr); // connect string
-//        //System.out.println(connStr);
-//        args.add (pytPath.concat(pytFile)); // path to the python script
-//        //System.out.println(pytDir.concat(pytPath).concat(pytFile));
-//        ProcessBuilder pb = new ProcessBuilder (args);
-//        Process p = null;
-//
-//        p = pb.start();
-//        BufferedReader stdInput = new BufferedReader(
-//                new InputStreamReader( p.getInputStream() ));
-//
-//        String s = "See tmp.log for ".concat(pytPath.concat(pytFile).concat(" output."));
-//        Integer errLvl;
-//        Integer batRetVal;
-//
-//        //s = stdInput.readLine();
-//        errLvl = Integer.valueOf(stdInput.readLine());
-//
-//        batRetVal =  p.waitFor();
-//
-//        ++callCnt;
-//
-//        res = new RprModel (connStr, s, errLvl, batRetVal, callCnt);
-//
-//        return res;
+
+        rprModelService.setBatPath(batPath);
         rprModelService.setBatFile(batFile);
+        rprModelService.setBatParmHost(batParmHost);
+        rprModelService.setBatParmDbname(batParmDbname);
+        rprModelService.setBatParmUser(batParmUser);
+        rprModelService.setBatParmPass(batParmPass);
+
+        rprModelService.setPytPath(pytPath);
+        rprModelService.setPytFile(pytFile);
 
         return rprModelService.getResponse();
 
