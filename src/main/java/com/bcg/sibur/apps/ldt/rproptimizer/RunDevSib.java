@@ -1,5 +1,6 @@
 package com.bcg.sibur.apps.ldt.rproptimizer;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -41,8 +42,9 @@ public class RunDevSib implements MessageService {
     @Value("${pytfile}")
     private String pytFile;
 
-    private Integer callCnt = 0;
-
+    @Autowired
+    private RprModelService rprModelService;
+//    private Integer callCnt = 0;
     /*
         @RequestMapping(value = "/run-rpr", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
         public String get() {
@@ -51,37 +53,40 @@ public class RunDevSib implements MessageService {
     */
     @Override
     public RprModel getResponse() throws InterruptedException, IOException {
-        String connStr = "\"".concat(batParmHost).concat(" ").concat(batParmDbname).concat(" ").concat(batParmUser).concat(" ").concat(batParmPass).concat("\"");
+//        String connStr = "\"".concat(batParmHost).concat(" ").concat(batParmDbname).concat(" ").concat(batParmUser).concat(" ").concat(batParmPass).concat("\"");
+//
+//        List<String> args = new ArrayList<String>();
+//        RprModel res ;
+//        args.add (batPath.concat(batFile)); // command name
+//        //System.out.println(batDir.concat(batPath).concat(batFile));
+//        args.add (connStr); // connect string
+//        //System.out.println(connStr);
+//        args.add (pytPath.concat(pytFile)); // path to the python script
+//        //System.out.println(pytDir.concat(pytPath).concat(pytFile));
+//        ProcessBuilder pb = new ProcessBuilder (args);
+//        Process p = null;
+//
+//        p = pb.start();
+//        BufferedReader stdInput = new BufferedReader(
+//                new InputStreamReader( p.getInputStream() ));
+//
+//        String s = "See tmp.log for ".concat(pytPath.concat(pytFile).concat(" output."));
+//        Integer errLvl;
+//        Integer batRetVal;
+//
+//        //s = stdInput.readLine();
+//        errLvl = Integer.valueOf(stdInput.readLine());
+//
+//        batRetVal =  p.waitFor();
+//
+//        ++callCnt;
+//
+//        res = new RprModel (connStr, s, errLvl, batRetVal, callCnt);
+//
+//        return res;
+        rprModelService.setBatFile(batFile);
 
-        List<String> args = new ArrayList<String>();
-        RprModel res ;
-        args.add (batPath.concat(batFile)); // command name
-        //System.out.println(batDir.concat(batPath).concat(batFile));
-        args.add (connStr); // connect string
-        //System.out.println(connStr);
-        args.add (pytPath.concat(pytFile)); // path to the python script
-        //System.out.println(pytDir.concat(pytPath).concat(pytFile));
-        ProcessBuilder pb = new ProcessBuilder (args);
-        Process p = null;
-
-        p = pb.start();
-        BufferedReader stdInput = new BufferedReader(
-                new InputStreamReader( p.getInputStream() ));
-
-        String s = "See tmp.log for ".concat(pytPath.concat(pytFile).concat(" output."));
-        Integer errLvl;
-        Integer batRetVal;
-
-        //s = stdInput.readLine();
-        errLvl = Integer.valueOf(stdInput.readLine());
-
-        batRetVal =  p.waitFor();
-
-        ++callCnt;
-
-        res = new RprModel (connStr, s, errLvl, batRetVal, callCnt);
-
-        return res;
+        return rprModelService.getResponse();
 
     }
 }
