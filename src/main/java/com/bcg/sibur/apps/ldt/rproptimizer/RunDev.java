@@ -57,7 +57,6 @@ public class RunDev implements MessageService {
         RprModel res ;
         args.add (batPath.concat(batFile)); // command name
         //System.out.println(batDir.concat(batPath).concat(batFile));
-        //args.add (batParmTst); // parameter passed in batfile
         args.add (connStr); // connect string
         //System.out.println(connStr);
         args.add (pytPath.concat(pytFile)); // path to the python script
