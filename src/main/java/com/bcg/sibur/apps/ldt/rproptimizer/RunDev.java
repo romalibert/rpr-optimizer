@@ -2,10 +2,7 @@ package com.bcg.sibur.apps.ldt.rproptimizer;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,8 +13,6 @@ import java.util.List;
 @Component
 @Profile("dev")
 public class RunDev implements MessageService {
-    @Value("${batdir}")
-    private String batDir;
 
     @Value("${batpath}")
     private String batPath;
@@ -40,9 +35,6 @@ public class RunDev implements MessageService {
     @Value("${batparmpass}")
     private String batParmPass;
 
-    @Value("${pytdir}")
-    private String pytDir;
-
     @Value("${pytpath}")
     private String pytPath;
 
@@ -63,12 +55,12 @@ public class RunDev implements MessageService {
 
         List<String> args = new ArrayList<String>();
         RprModel res ;
-        args.add (batDir.concat(batPath).concat(batFile)); // command name
+        args.add (batPath.concat(batFile)); // command name
         //System.out.println(batDir.concat(batPath).concat(batFile));
         //args.add (batParmTst); // parameter passed in batfile
         args.add (connStr); // connect string
         //System.out.println(connStr);
-        args.add (pytDir.concat(pytPath).concat(pytFile)); // path to the python script
+        args.add (pytPath.concat(pytFile)); // path to the python script
         //System.out.println(pytDir.concat(pytPath).concat(pytFile));
         ProcessBuilder pb = new ProcessBuilder (args);
         Process p = null;
@@ -77,7 +69,7 @@ public class RunDev implements MessageService {
         BufferedReader stdInput = new BufferedReader(
                 new InputStreamReader( p.getInputStream() ));
 
-        String s = "See tmp.log for ".concat(pytDir.concat(pytPath).concat(pytFile).concat(" output."));
+        String s = "See tmp.log for ".concat(pytPath.concat(pytFile).concat(" output."));
         Integer errLvl;
         Integer batRetVal;
 
