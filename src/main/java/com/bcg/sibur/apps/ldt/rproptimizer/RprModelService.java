@@ -96,7 +96,7 @@ public class RprModelService {
         BufferedReader stdInput = new BufferedReader(
                 new InputStreamReader( p.getInputStream() ));
 
-        String s = "See tmp.log for ".concat(pytPath.concat(pytFile).concat(" output."));
+        String s = "See runbat.log for ".concat(pytPath.concat(pytFile).concat(" output."));
         Integer errLvl;
         Integer batRetVal;
 
