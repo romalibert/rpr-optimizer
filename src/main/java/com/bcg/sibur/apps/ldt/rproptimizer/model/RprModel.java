@@ -1,4 +1,4 @@
-package com.bcg.sibur.apps.ldt.rproptimizer;
+package com.bcg.sibur.apps.ldt.rproptimizer.model;
 
 public class RprModel {
     private String scriptParm;
@@ -65,5 +65,16 @@ public class RprModel {
 
     public void setCallCnt(Integer callCnt) {
         this.callCnt = callCnt;
+    }
+
+    @Override
+    public String toString() {
+        return "RprModel{" +
+                "scriptParm='" + scriptParm + '\'' +
+                ", scriptRes='" + scriptRes + '\'' +
+                ", errorLevel=" + errorLevel +
+                ", batRetVal=" + batRetVal +
+                ", callCnt=" + callCnt +
+                '}';
     }
 }
