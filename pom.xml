@@ -24,7 +24,7 @@
         <java.version>1.8</java.version>
         <spring-cloud.version>Finchley.M9</spring-cloud.version>
         <hibernate.version>5.2.15.Final</hibernate.version>
-        <apache.poi.version>3.17</apache.poi.version>
+        <apache.poi.version>4.1.1</apache.poi.version>
     </properties>
 
     <dependencies>
